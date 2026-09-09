@@ -2,6 +2,7 @@ package Ui;
 
 import Model.Cliente;
 import Model.Conta;
+import Service.UpdateBd;
 import Service.UpdateCadastro;
 
 import java.util.ArrayList;
@@ -13,17 +14,37 @@ public class Main {
 
         Scanner option = new Scanner(System.in);
         ArrayList<Cliente> clientes = new ArrayList<>();
+
         UpdateCadastro cadastro = new UpdateCadastro(clientes, option);
+        UpdateBd banco = new UpdateBd(clientes, option);
 
         boolean executando = true;
 
         while (executando) {
-
-            Menu.mostrarMenu();
+            Menu.menuPrincipal();
 
             String escolha = option.nextLine();
 
             switch (escolha) {
+                case "1":
+                    // Clientes
+                    break;
+
+                case "2":
+                    // Banco
+                    break;
+
+                case "3":
+                    executando = false;
+                    System.out.println("Saindo...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
+
+            switch () {
 
                 case "1":
                     cadastro.cadastrarClient();

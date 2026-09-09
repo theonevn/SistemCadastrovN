@@ -59,7 +59,7 @@ public class UpdateBd {
     }
 
     public void Sacar() {
-        boolean encontrado = true;
+        boolean encontrado = false;
         System.out.println("Digite seu CPF:");
         String cpfBusca = optionbd.nextLine();
 
@@ -79,11 +79,15 @@ public class UpdateBd {
     }
 
     public void transferir() {
-        boolean encontrado = false;
         System.out.println("Digite o CPF de origem:");
         String cpfOrigem = optionbd.nextLine();
         System.out.println("Digite o CPF de destino:");
         String cpfDestino = optionbd.nextLine();
+
+        if (cpfOrigem.equals(cpfDestino)) {
+            System.out.println("A conta de origem e destino não podem ser iguais.");
+            return;
+        }
 
         Cliente origem = null;
         Cliente destino = null;

@@ -1,6 +1,17 @@
 package Ui;
 
 public class Menu {
+
+      public static void menuPrincipal() {
+        System.out.println();
+        System.out.println("======== Sistema VN ========");
+        System.out.println();
+        System.out.println("1 - Clientes");
+        System.out.println("2 - Banco");
+        System.out.println("3 - Sair");
+        System.out.println();
+        System.out.print("Escolha uma opção: ");
+      }
       public static void mostrarMenu() {
 
 

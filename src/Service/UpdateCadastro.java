@@ -1,6 +1,8 @@
 package Service;
 
 import Model.Cliente;
+import Model.Conta;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,6 +31,7 @@ public class UpdateCadastro {
 
     public void cadastrarClient() {
         Cliente cliente = new Cliente();
+        cliente.setConta(new Conta.InfConta());
 
         System.out.print("Digite o nome: ");
         cliente.setNome(option.nextLine());
