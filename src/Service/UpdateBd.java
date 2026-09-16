@@ -91,7 +91,6 @@ public class UpdateBd {
 
         Cliente origem = null;
         Cliente destino = null;
-
         for (Cliente c : clientes) {
             if (c.getCpf().equals(cpfOrigem)) {
                 origem = c;
@@ -114,11 +113,17 @@ public class UpdateBd {
         double transferir = optionbd.nextDouble();
         optionbd.nextLine();
 
+        if (transferir <= 0) {
+            System.out.println("Valor da transferência inválido.");
+            return;
+        }
+
         if (origem.getCont().sacar(transferir)) {
             destino.getCont().depositar(transferir);
             System.out.println("Transferência realizada com sucesso!");
-            System.out.println("DE: " + origem.getNome() + "PARA: " + destino.getNome()+".");
-            System.out.println("No Valor de:R$ "+ transferir + ".");
+            System.out.println("DE: " + origem.getNome() + "PARA: " + destino.getNome() + ".");
+            System.out.println("No Valor de:R$ " + transferir + ".");
         }
     }
 }
+

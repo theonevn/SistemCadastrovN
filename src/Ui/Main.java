@@ -69,8 +69,10 @@ public class Main {
 
                             default:
                                 System.out.println("Opção inválida.");
+                            break;
                         }
-                    }
+                   }
+                    break;
                 case "2":
 
                     boolean menubanco = true;
@@ -82,38 +84,22 @@ public class Main {
 
                         switch (opcaobanco) {
                             case "1":
-                                System.out.println("Saldo: R$ " + banco.verSaldo());
+                                banco.verSaldo();
                                 break;
 
                             case "2":
-
-                                System.out.print("Valor do depósito: ");
-                                double depositar = option.nextDouble();
-                                option.nextLine();
-
                                 banco.depositar();
                                 break;
 
                             case "3":
-
-                                System.out.print("Valor do saque: ");
-                                double saque = option.nextDouble();
-                                option.nextLine();
-
                                 banco.Sacar();
                                 break;
 
                             case "4":
-
-                                System.out.print("Valor da transferência: ");
-                                double transferencia = option.nextDouble();
-                                option.nextLine();
-
                                 banco.transferir();
                                 break;
 
                             case "5":
-
                                 menubanco = false;
 
                                 System.out.println("Obrigado por utilizar o BancoVlux!");
@@ -122,8 +108,11 @@ public class Main {
                             default:
 
                                 System.out.println("Opção inválida.");
+                                break;
                         }
                     }
+                    break;
+
                 case "3":
                     executando = false;
                     System.out.println("Saindo...");
@@ -131,6 +120,7 @@ public class Main {
 
                 default:
                     System.out.println("Opção inválida.");
+                 break;
             }
         }
     }

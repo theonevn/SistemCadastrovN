@@ -35,21 +35,34 @@ public class UpdateCadastro {
 
         System.out.print("Digite o nome: ");
         cliente.setNome(option.nextLine());
+        for (Cliente c : clientes) {
+            if (c.getCpf().equals((cliente.getCpf()))) {
+                System.out.println("Nome já cadastrado");
+            }
+        }
 
         System.out.print("Digite o CPF: ");
         cliente.setCpf(option.nextLine());
+        for (Cliente c : clientes) {
+            if (c.getCpf().equals((cliente.getCpf()))) {
+                System.out.println("CPF já cadastrado");
+            }
+            if (c.getCpf().equals((cliente.getCpf()))) {
+                == null ou < 0
 
-        System.out.print("Digite a idade: ");
-        cliente.setIdade(option.nextInt());
-        option.nextLine();
+            }
+                System.out.print("Digite a idade: ");
+                cliente.setIdade(option.nextInt());
+                option.nextLine();
 
-        System.out.print("Digite o telefone: ");
-        cliente.setTelefone(option.nextLine());
+                System.out.print("Digite o telefone: ");
+                cliente.setTelefone(option.nextLine());
 
-        clientes.add(cliente);
-        System.out.println("Cliente cadastrado!");
+                clientes.add(cliente);
+                System.out.println("Cliente cadastrado!");
 
 
+        }
     }
 
     public void buscarClient() {
