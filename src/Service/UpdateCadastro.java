@@ -28,7 +28,6 @@ public class UpdateCadastro {
         }
     }
 
-
     public void cadastrarClient() {
         Cliente cliente = new Cliente();
         cliente.setConta(new Conta.InfConta());
@@ -36,7 +35,7 @@ public class UpdateCadastro {
         System.out.print("Digite o nome: ");
         cliente.setNome(option.nextLine());
         for (Cliente c : clientes) {
-            if (c.getCpf().equals((cliente.getCpf()))) {
+            if (c.getNome().equals((cliente.getNome()))) {
                 System.out.println("Nome já cadastrado");
             }
         }
@@ -46,21 +45,23 @@ public class UpdateCadastro {
         for (Cliente c : clientes) {
             if (c.getCpf().equals((cliente.getCpf()))) {
                 System.out.println("CPF já cadastrado");
+                return;
             }
-            if (c.getCpf().equals((cliente.getCpf()))) {
-                == null ou < 0
-
-            }
+        }
                 System.out.print("Digite a idade: ");
                 cliente.setIdade(option.nextInt());
                 option.nextLine();
+            for (Cliente c : clientes) {
+                if (c.getIdade() <= 16) {
+                    System.out.println("Idade Invalida,Idade superior a 16 anos ou pelo responsavel");
+                return;
+                }
 
                 System.out.print("Digite o telefone: ");
                 cliente.setTelefone(option.nextLine());
 
                 clientes.add(cliente);
                 System.out.println("Cliente cadastrado!");
-
 
         }
     }
@@ -90,6 +91,9 @@ public class UpdateCadastro {
         String cpfRec = option.nextLine();
         boolean encontrado = false;
 
+        if(clientes.equals(cpfRec)){
+            System.out.println("Não e possivel alterar esse cpf");
+        }
         for (Cliente c : clientes) {
 
             if (c.getCpf().equals(cpfRec)) {
@@ -104,9 +108,9 @@ public class UpdateCadastro {
                 System.out.println("Novo Telefone: ");
                 c.setTelefone(option.nextLine());
             }
-        }
-        if (!encontrado) {
-            System.out.println("CPF não encontrado.");
+            if (!encontrado) {
+                System.out.println("CPF não encontrado.");
+            }
         }
     }
 
