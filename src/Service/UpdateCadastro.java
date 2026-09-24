@@ -54,8 +54,9 @@ public class UpdateCadastro {
             for (Cliente c : clientes) {
                 if (c.getIdade() <= 16) {
                     System.out.println("Idade Invalida,Idade superior a 16 anos ou pelo responsavel");
-                return;
+                    return;
                 }
+            }
 
                 System.out.print("Digite o telefone: ");
                 cliente.setTelefone(option.nextLine());
@@ -63,7 +64,6 @@ public class UpdateCadastro {
                 clientes.add(cliente);
                 System.out.println("Cliente cadastrado!");
 
-        }
     }
 
     public void buscarClient() {
@@ -91,7 +91,7 @@ public class UpdateCadastro {
         String cpfRec = option.nextLine();
         boolean encontrado = false;
 
-        if(clientes.equals(cpfRec)){
+        if (!encontrado) {
             System.out.println("Não e possivel alterar esse cpf");
         }
         for (Cliente c : clientes) {
@@ -108,9 +108,9 @@ public class UpdateCadastro {
                 System.out.println("Novo Telefone: ");
                 c.setTelefone(option.nextLine());
             }
-            if (!encontrado) {
-                System.out.println("CPF não encontrado.");
-            }
+        }
+        if (!encontrado) {
+            System.out.println("CPF não encontrado.");
         }
     }
 
