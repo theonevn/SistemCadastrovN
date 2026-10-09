@@ -8,7 +8,7 @@ public class Cliente {
     private String telefone;
     private Conta.InfConta conta;
 
-    public Conta.InfConta getCont() {
+    public Conta.InfConta getConta() {
         return conta;
     }
 

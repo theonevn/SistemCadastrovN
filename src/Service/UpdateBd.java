@@ -30,7 +30,7 @@ public class UpdateBd {
                 System.out.print("Valor do depósito: ");
                 double deposito = optionbd.nextDouble();
                 optionbd.nextLine();
-                c.getCont().depositar(deposito);
+                c.getConta().depositar(deposito);
                 break;
             }
         if (!encontrado) {
@@ -49,7 +49,7 @@ public class UpdateBd {
                 encontrado = true;
                 System.out.println("Nome: " + c.getNome());
                 System.out.println("CPF: " + c.getCpf());
-                System.out.println("Saldo " + c.getCont().getSaldo());
+                System.out.println("Saldo " + c.getConta().getSaldo());
                 break;
             }
         if (!encontrado) {
@@ -69,7 +69,7 @@ public class UpdateBd {
                 System.out.print("Valor do saque: ");
                 double sacar = optionbd.nextDouble();
                 optionbd.nextLine();
-                c.getCont().sacar(sacar);
+                c.getConta().sacar(sacar);
                 break;
             }
         if (!encontrado) {
@@ -118,8 +118,8 @@ public class UpdateBd {
             return;
         }
 
-        if (origem.getCont().sacar(transferir)) {
-            destino.getCont().depositar(transferir);
+        if (origem.getConta().sacar(transferir)) {
+            destino.getConta().depositar(transferir);
             System.out.println("Transferência realizada com sucesso!");
             System.out.println("DE: " + origem.getNome() + "PARA: " + destino.getNome() + ".");
             System.out.println("No Valor de:R$ " + transferir + ".");

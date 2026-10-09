@@ -2,24 +2,22 @@ package Service;
 
 import Model.Cliente;
 import Model.Conta;
+import Repository.ClienteRepository;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UpdateCadastro {
 
-    private ArrayList<Cliente> clientes;
-    private Scanner option;
+    private final ClienteRepository repo;
+    private final Scanner option;
 
-    public UpdateCadastro(ArrayList<Cliente> clientes, Scanner option) {
-        this.clientes = clientes;
+    public UpdateCadastro(ClienteRepository repo, Scanner option) {
+        this.repo = repo;
         this.option = option;
     }
 
     public void listarClient() {
-
-        for (Cliente c : clientes) {
-
+        for (Cliente c : repo.listar()) {
             System.out.println("Nome: " + c.getNome());
             System.out.println("CPF: " + c.getCpf());
             System.out.println("Idade: " + c.getIdade());
@@ -34,109 +32,81 @@ public class UpdateCadastro {
 
         System.out.print("Digite o nome: ");
         cliente.setNome(option.nextLine());
-        for (Cliente c : clientes) {
-            if (c.getNome().equals((cliente.getNome()))) {
-                System.out.println("Nome já cadastrado");
-            }
-        }
 
         System.out.print("Digite o CPF: ");
         cliente.setCpf(option.nextLine());
-        for (Cliente c : clientes) {
-            if (c.getCpf().equals((cliente.getCpf()))) {
-                System.out.println("CPF já cadastrado");
-                return;
-            }
+        if (repo.buscarPorCpf(cliente.getCpf()) != null) {
+            System.out.println("CPF já cadastrado");
+            return;
         }
-                System.out.print("Digite a idade: ");
-                cliente.setIdade(option.nextInt());
-                option.nextLine();
-            for (Cliente c : clientes) {
-                if (c.getIdade() <= 16) {
-                    System.out.println("Idade Invalida,Idade superior a 16 anos ou pelo responsavel");
-                    return;
-                }
-            }
 
-                System.out.print("Digite o telefone: ");
-                cliente.setTelefone(option.nextLine());
+        System.out.print("Digite a idade: ");
+        cliente.setIdade(option.nextInt());
+        option.nextLine();
+        if (cliente.getIdade() <= 16) {
+            System.out.println("Idade inválida, precisa ser superior a 16 anos ou ter um responsável.");
+            return;
+        }
 
-                clientes.add(cliente);
-                System.out.println("Cliente cadastrado!");
+        System.out.print("Digite o telefone: ");
+        cliente.setTelefone(option.nextLine());
 
+        repo.inserir(cliente);
+        System.out.println("Cliente cadastrado!");
     }
 
     public void buscarClient() {
-        boolean encontrado = false;
         System.out.println("Digite seu CPF:");
-
         String cpfBusca = option.nextLine();
 
-        for (Cliente c : clientes)
-            if (c.getCpf().equals(cpfBusca)) {
-                encontrado = true;
-                System.out.println("Nome: " + c.getNome());
-                System.out.println("CPF: " + c.getCpf());
-                System.out.println("Idade: " + c.getIdade());
-                System.out.println("Telefone: " + c.getTelefone());
-                System.out.println();
-            }
-        if (!encontrado) {
+        Cliente c = repo.buscarPorCpf(cpfBusca);
+        if (c == null) {
             System.out.println("CPF não encontrado.");
+            return;
         }
+
+        System.out.println("Nome: " + c.getNome());
+        System.out.println("CPF: " + c.getCpf());
+        System.out.println("Idade: " + c.getIdade());
+        System.out.println("Telefone: " + c.getTelefone());
+        System.out.println();
     }
 
     public void alterarClient() {
         System.out.println("Digite seu CPF:");
         String cpfRec = option.nextLine();
-        boolean encontrado = false;
 
-        if (!encontrado) {
-            System.out.println("Não e possivel alterar esse cpf");
-        }
-        for (Cliente c : clientes) {
-
-            if (c.getCpf().equals(cpfRec)) {
-                encontrado = true;
-
-                System.out.print("Novo nome: ");
-                c.setNome(option.nextLine());
-
-                System.out.println("Nova Idade: ");
-                c.setIdade(option.nextInt());
-                option.nextLine();
-                System.out.println("Novo Telefone: ");
-                c.setTelefone(option.nextLine());
-            }
-        }
-        if (!encontrado) {
+        Cliente c = repo.buscarPorCpf(cpfRec);
+        if (c == null) {
             System.out.println("CPF não encontrado.");
+            return;
+        }
+
+        System.out.print("Novo nome: ");
+        c.setNome(option.nextLine());
+
+        System.out.print("Nova idade: ");
+        c.setIdade(option.nextInt());
+        option.nextLine();
+
+        System.out.print("Novo telefone: ");
+        c.setTelefone(option.nextLine());
+
+        if (repo.atualizar(c)) {
+            System.out.println("Cliente atualizado com sucesso!");
+        } else {
+            System.out.println("Não foi possível atualizar esse CPF.");
         }
     }
 
     public void excluirClient() {
-
         System.out.println("Digite seu CPF:");
         String cpfRem = option.nextLine();
-        boolean encontrado = false;
 
-
-        for (int i = 0; i < clientes.size(); i++) {
-            Cliente c = clientes.get(i);
-            if (c.getCpf().equals(cpfRem)) {
-                encontrado = true;
-
-                System.out.print("Excluir Usuario Portador do CPF:" + c.getCpf());
-
-                clientes.remove(i);
-
-                System.out.println("Cliente Excluido com sucesso!");
-                break;
-            }
-        }
-        if (!encontrado) {
-            System.out.println("CPF invalido.");
+        if (repo.excluir(cpfRem)) {
+            System.out.println("Cliente excluído com sucesso!");
+        } else {
+            System.out.println("CPF inválido.");
         }
     }
 }
-

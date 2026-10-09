@@ -3,19 +3,22 @@ package Ui;
 import Model.Cliente;
 import Service.UpdateBd;
 import Service.UpdateCadastro;
-
+import Repository.ClienteRepository;
+import Repository.ClienteRepositoryMemoria;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
         Scanner option = new Scanner(System.in);
         ArrayList<Cliente> clientes = new ArrayList<>();
-
-        UpdateCadastro cadastro = new UpdateCadastro(clientes, option);
+        ClienteRepository repo = new ClienteRepositoryMemoria(clientes);
+        UpdateCadastro cadastro = new UpdateCadastro(repo, option);
         UpdateBd banco = new UpdateBd(clientes, option);
+
+        cadastro = new UpdateCadastro(clientes, option);
+        banco = new UpdateBd(clientes, option);
 
         boolean executando = true;
 
