@@ -13,12 +13,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner option = new Scanner(System.in);
         ArrayList<Cliente> clientes = new ArrayList<>();
+
         ClienteRepository repo = new ClienteRepositoryMemoria(clientes);
         UpdateCadastro cadastro = new UpdateCadastro(repo, option);
         UpdateBd banco = new UpdateBd(clientes, option);
-
-        cadastro = new UpdateCadastro(clientes, option);
-        banco = new UpdateBd(clientes, option);
 
         boolean executando = true;
 
@@ -72,9 +70,9 @@ public class Main {
 
                             default:
                                 System.out.println("Opção inválida.");
-                            break;
+                                break;
                         }
-                   }
+                    }
                     break;
                 case "2":
 
@@ -123,11 +121,12 @@ public class Main {
 
                 default:
                     System.out.println("Opção inválida.");
-                 break;
+                    break;
             }
         }
     }
 }
+
 
 
 
